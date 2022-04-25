@@ -2,6 +2,7 @@ import { ContactNotFoundError } from './../../../src/domain/errors/not-found-con
 import {
   VALID_CONTACT_INPUT_PARAMS_FIXTURE,
   VALID_CONTACT_INPUT_BODY_FIXTURE,
+  UPDATE_CONTACT_RESPONSE_FIXTURE,
 } from './update-contact.fixture';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
@@ -51,5 +52,13 @@ describe('UpdateContactService', () => {
         VALID_CONTACT_INPUT_BODY_FIXTURE,
       ),
     ).rejects.toThrowError(new ContactNotFoundError());
+  });
+
+  it('should update a contact and return status code and a message', async () => {
+    const serviceResponse = await service.execute(
+      VALID_CONTACT_INPUT_PARAMS_FIXTURE,
+      VALID_CONTACT_INPUT_BODY_FIXTURE,
+    );
+    expect(serviceResponse).toEqual(UPDATE_CONTACT_RESPONSE_FIXTURE);
   });
 });
