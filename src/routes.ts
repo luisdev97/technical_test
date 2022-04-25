@@ -10,5 +10,6 @@ export const routesV1 = {
     findContacts: `${userRoot}/:userId/contacts`,
     createContact: `${userRoot}/:userId/contacts/create`,
     updateContact: `${userRoot}/:userId/contacts/update`,
+    deleteContact: `${userRoot}/:userId/contacts/:contactId/delete`,
   },
 };
