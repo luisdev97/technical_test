@@ -29,6 +29,10 @@ export class FindContactsService {
       .addSelect('con.numberType', 'numberType')
       .where('con.userId = :userId', { userId: params.userId });
 
+    if (queryParams.orderBy && queryParams.senseOfOrder) {
+      query.orderBy(`con.${queryParams.orderBy}`, queryParams.senseOfOrder);
+    }
+
     const response: FindContactResponseDTO[] = await query.execute();
     return response;
   }
