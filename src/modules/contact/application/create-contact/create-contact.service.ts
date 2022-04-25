@@ -2,6 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ContactEntity } from '../../domain/entities/contact.entity';
+import { CreateContactParamsError } from '../../domain/errors/create-contact.domain.error';
 import {
   CreateContactBodyInputDto,
   CreateContactParamsImputDto,
@@ -24,9 +25,22 @@ export class CreateContactService {
       ...body,
     });
 
+    if (
+      !newContact.address ||
+      !newContact.email ||
+      !newContact.mailingAddress ||
+      !newContact.number
+    ) {
+      throw new CreateContactParamsError();
+    }
+
     const savedContact: ContactEntity = await this.contactRepository.save(
       newContact,
     );
+
+    if (!savedContact) {
+      throw new CreateContactParamsError();
+    }
 
     return {
       message: 'Contact created succesfully',
