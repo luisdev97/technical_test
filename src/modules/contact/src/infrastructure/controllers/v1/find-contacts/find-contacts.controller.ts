@@ -1,5 +1,6 @@
+import { AuthGuard } from '@nestjs/passport';
 import { FindContactResponseDTO } from './../../../../application/find-contacts/find-contacts.response.dto';
-import { Get, HttpStatus, Param, Query } from '@nestjs/common';
+import { Get, HttpStatus, Param, Query, UseGuards } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { FindContactsService } from '../../../../application/find-contacts/find-contacs.service';
 import { SUCCESSFUL_RESPONSE } from '../../../../../../shared/infrastructure/constants/constants';
@@ -16,6 +17,7 @@ export class FindContactsController {
   constructor(private readonly service: FindContactsService) {}
 
   @Get(routesV1.users.findContacts)
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Find contacts of an user.' })
   @ApiOkResponse({
     description: SUCCESSFUL_RESPONSE,

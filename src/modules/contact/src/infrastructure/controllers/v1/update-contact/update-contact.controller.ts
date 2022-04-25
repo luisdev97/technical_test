@@ -24,6 +24,7 @@ export class UpdateContactController {
   constructor(private readonly service: UpdateContactService) {}
 
   @Put(routesV1.users.updateContact)
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ summary: 'Update a contact of an user.' })
   @ApiOkResponse({
     description: SUCCESSFUL_RESPONSE,
