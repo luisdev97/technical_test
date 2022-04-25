@@ -1,3 +1,8 @@
+import { ContactNotFoundError } from './../../../src/domain/errors/not-found-contact.domain.error';
+import {
+  VALID_CONTACT_INPUT_PARAMS_FIXTURE,
+  VALID_CONTACT_INPUT_BODY_FIXTURE,
+} from './update-contact.fixture';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { MockType } from 'test/utilities/mock-factory';
@@ -36,5 +41,15 @@ describe('UpdateContactService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should throw an error when there is not a contact with the indicated ID', () => {
+    contactRepositoryMock.findOne.mockReturnValue(undefined);
+    expect(
+      service.execute(
+        VALID_CONTACT_INPUT_PARAMS_FIXTURE,
+        VALID_CONTACT_INPUT_BODY_FIXTURE,
+      ),
+    ).rejects.toThrowError(new ContactNotFoundError());
   });
 });
