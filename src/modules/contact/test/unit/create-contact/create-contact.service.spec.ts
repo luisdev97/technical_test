@@ -46,4 +46,13 @@ describe('CreateContactService', () => {
     );
     expect(serviceResponse).toEqual(CREATE_CONTACT_RESPONSE_FIXTURE);
   });
+
+  it('should throw an error when some params contain invalid values', () => {
+    expect(
+      service.execute(
+        VALID_CONTACT_INPUT_PARAMS_FIXTURE,
+        INVALID_CONTACT_INPUT_BODY_FIXTURE,
+      ),
+    ).rejects.toThrowError(new CreateContactParamsError());
+  });
 });
