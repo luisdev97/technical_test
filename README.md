@@ -24,26 +24,78 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Little contacts api for a technical test.
+
+## About the project
+
+For the project I have used a boilerplate that I built for myself, because the ones I found exceeded or did not reach my requirements.
+
+#### The Nest.js boilerplate consists of:
+
+
+
+* Container with a database ready to be deployed on any computer that has Docker and Docker-compose installed.
+* Simple auth module.
+* Lint and preset configuration.
+* Configuring git hooks with Husky to auto-format code and validate that commits follow the "conventional commits" format.
+* Some utility for the domain and architecture layers, in order to create simpler code from scratch.
+
+
+## Technical choices
+
+#### I chose several tools and detail the reason for each one.
+
+- Nest.js: I could have chosen express and used JavaScript without typing to be able to finish the test completely but I prefer to do things calmly but safely, even so I have left some measures in the inkwell due to lack of time.
+
+- Docker-compose: allows the team to test the project without relying on more complex dependencies like a database engine.
+
+- Swagger: It is the documentation system that the framework already has installed and I find it really useful, I have not had time to add examples for the DTOs because time has run out very short and I have had to do without some feature and more tests.
 
 ## Installation
 
-```bash
-$ npm install
+We start by installing the dependencies
+
+
 ```
+$ yarn install
+```
+
+  The second and last step, we create the .env file for the project configuration
+
+
+```bash
+MYSQL_USER=root
+MYSQL_PASSOWRD=root
+MYSQL_DB=test_db
+MYSQL_PORT=3306
+
+API_PORT=4050
+
+SECRET_SEED=little_secret
+TOKEN_EXPIRATION=1d
+```
+
+
+  
+  
 
 ## Running the app
 
+Now, we need to put on the container with the MySql database offered by the boilerplate and run the application.
+
 ```bash
-# development
-$ npm run start
+#boot the container
+$ docker-compose up -d
 
-# watch mode
-$ npm run start:dev
+#development mode:
+$ yarn start
 
-# production mode
-$ npm run start:prod
+#watch mode:
+$ yarn start:dev
+
+
 ```
+
 
 ## Test
 
@@ -58,16 +110,15 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+
+## Stay in touch
+
+- Author - [Github](https://github.com/luisdev97)
+- [LinkedIn](https://www.linkedin.com/in/luis-david-amador-montoro)
+
+
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
