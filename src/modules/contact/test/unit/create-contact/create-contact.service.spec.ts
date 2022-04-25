@@ -38,4 +38,12 @@ describe('CreateContactService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should create a contact and return status code and a message', async () => {
+    const serviceResponse = await service.execute(
+      VALID_CONTACT_INPUT_PARAMS_FIXTURE,
+      VALID_CONTACT_INPUT_BODY_FIXTURE,
+    );
+    expect(serviceResponse).toEqual(CREATE_CONTACT_RESPONSE_FIXTURE);
+  });
 });
