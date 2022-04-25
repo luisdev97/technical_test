@@ -1,3 +1,4 @@
+import { ContactNotFoundError } from './../../domain/errors/not-found-contact.domain.error';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -22,6 +23,10 @@ export class UpdateContactService {
     const contact = await this.contactRepository.findOne({
       where: { id: params.contactId },
     });
+
+    if (!contact) {
+      throw new ContactNotFoundError();
+    }
 
     const updatedContact: ContactEntity = await this.contactRepository.save({
       ...contact,
