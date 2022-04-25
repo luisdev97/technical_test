@@ -1,12 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NumberType } from '../../../../domain/types/contact-number-type.enum';
 
-export class CreateContactParamsImputDto {
+export class CreateContactParamsInputDTO {
   @ApiProperty()
   userId: number;
 }
 
-export class CreateContactBodyInputDto {
+export class CreateContactBodyInputDTO {
   @ApiProperty()
   email: string;
 

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ContactEntity } from './domain/entities/contact.entity';
+import { ContactEntity } from './src/domain/entities/contact.entity';
 
 const controllers = [];
 

@@ -1,14 +1,14 @@
 import { Body, HttpStatus, Param, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CreateContactService } from '../../../../../contact/application/create-contact/create-contact.service';
-import { SUCCESSFUL_RESPONSE } from '../../../../../shared/infrastructure/constants/constants';
-import { ApiController } from '../../../../../shared/infrastructure/decorators/api-controller.decorator';
-import { routesV1 } from '../../../../../..//routes';
+import { CreateContactService } from '../../../../application/create-contact/create-contact.service';
+import { SUCCESSFUL_RESPONSE } from '../../../../../../shared/infrastructure/constants/constants';
+import { ApiController } from '../../../../../../shared/infrastructure/decorators/api-controller.decorator';
+import { routesV1 } from '../../../../../../../routes';
 import {
   CreateContactBodyInputDto,
   CreateContactParamsImputDto,
 } from './create-contact.input.dto';
-import { CreateContactResponseDTO } from '../../../../../contact/application/create-contact/create-contact.response.dto';
+import { CreateContactResponseDTO } from '../../../../application/create-contact/create-contact.response.dto';
 
 @ApiController(routesV1.version)
 @ApiTags('Contacts')

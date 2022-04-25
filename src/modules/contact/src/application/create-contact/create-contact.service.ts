@@ -4,8 +4,8 @@ import { Repository } from 'typeorm';
 import { ContactEntity } from '../../domain/entities/contact.entity';
 import { CreateContactParamsError } from '../../domain/errors/create-contact.domain.error';
 import {
-  CreateContactBodyInputDto,
-  CreateContactParamsImputDto,
+  CreateContactBodyInputDTO,
+  CreateContactParamsInputDTO,
 } from '../../infrastructure/controllers/v1/create-contact/create-contact.input.dto';
 import { CreateContactResponseDTO } from './create-contact.response.dto';
 
@@ -17,8 +17,8 @@ export class CreateContactService {
   ) {}
 
   async execute(
-    params: CreateContactParamsImputDto,
-    body: CreateContactBodyInputDto,
+    params: CreateContactParamsInputDTO,
+    body: CreateContactBodyInputDTO,
   ): Promise<CreateContactResponseDTO> {
     const newContact: ContactEntity = this.contactRepository.create({
       ...params,
@@ -43,7 +43,7 @@ export class CreateContactService {
     }
 
     return {
-      message: 'Contact created succesfully',
+      message: 'Contact created successfully',
       status: HttpStatus.OK,
     };
   }
