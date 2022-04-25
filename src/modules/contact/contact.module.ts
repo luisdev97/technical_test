@@ -6,6 +6,7 @@ import { FindContactsService } from './src/application/find-contacts/find-contac
 import { ContactEntity } from './src/domain/entities/contact.entity';
 import { CreateContactController } from './src/infrastructure/controllers/v1/create-contact/create-contact.controller';
 import { FindContactsController } from './src/infrastructure/controllers/v1/find-contacts/find-contacts.controller';
+import { UpdateContactService } from './src/application/update-contact/update-contact.service';
 
 const controllers = [
   CreateContactController,
@@ -13,7 +14,11 @@ const controllers = [
   UpdateContactController,
 ];
 
-const providers = [CreateContactService, FindContactsService];
+const providers = [
+  CreateContactService,
+  FindContactsService,
+  UpdateContactService,
+];
 
 @Module({
   imports: [TypeOrmModule.forFeature([ContactEntity])],
