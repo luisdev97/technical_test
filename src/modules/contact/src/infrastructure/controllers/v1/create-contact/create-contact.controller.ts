@@ -5,8 +5,8 @@ import { SUCCESSFUL_RESPONSE } from '../../../../../../shared/infrastructure/con
 import { ApiController } from '../../../../../../shared/infrastructure/decorators/api-controller.decorator';
 import { routesV1 } from '../../../../../../../routes';
 import {
-  CreateContactBodyInputDto,
-  CreateContactParamsImputDto,
+  CreateContactParamsInputDTO,
+  CreateContactBodyInputDTO,
 } from './create-contact.input.dto';
 import { CreateContactResponseDTO } from '../../../../application/create-contact/create-contact.response.dto';
 
@@ -23,8 +23,8 @@ export class CreateContactController {
     type: CreateContactResponseDTO,
   })
   async createContact(
-    @Param() params: CreateContactParamsImputDto,
-    @Body() body: CreateContactBodyInputDto,
+    @Param() params: CreateContactParamsInputDTO,
+    @Body() body: CreateContactBodyInputDTO,
   ): Promise<CreateContactResponseDTO> {
     return this.service.execute(params, body);
   }

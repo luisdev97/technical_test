@@ -1,8 +1,10 @@
+import { FindContactResponseDTO } from './../../../../application/find-contacts/find-contacts.response.dto';
 import { Get, HttpStatus, Param, Query } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { SUCCESSFUL_RESPONSE } from 'src/modules/shared/infrastructure/constants/constants';
-import { ApiController } from 'src/modules/shared/infrastructure/decorators/api-controller.decorator';
-import { routesV1 } from 'src/routes';
+import { FindContactsService } from '../../../../application/find-contacts/find-contacs.service';
+import { SUCCESSFUL_RESPONSE } from '../../../../../../shared/infrastructure/constants/constants';
+import { ApiController } from '../../../../../../shared/infrastructure/decorators/api-controller.decorator';
+import { routesV1 } from '../../../../../../..//routes';
 import {
   FindContactsQueryInputDTO,
   FindContactsParamsInputDTO,
@@ -11,6 +13,8 @@ import {
 @ApiController(routesV1.version)
 @ApiTags('Contacts')
 export class FindContactsController {
+  constructor(private readonly service: FindContactsService) {}
+
   @Get(routesV1.users.findContacts)
   @ApiOperation({ summary: 'Find contacts of an user.' })
   @ApiOkResponse({
@@ -21,7 +25,7 @@ export class FindContactsController {
   async findContacts(
     @Param() params: FindContactsParamsInputDTO,
     @Query() queryParams: FindContactsQueryInputDTO,
-  ): Promise<any> {
-    return 'Dumb content';
+  ): Promise<FindContactResponseDTO[]> {
+    return this.service.execute(params, queryParams);
   }
 }
