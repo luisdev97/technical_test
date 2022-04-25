@@ -1,3 +1,5 @@
+import { UpdateContactResponseDTO } from './../../../../application/update-contact/update-contact.response.dto';
+import { UpdateContactService } from './../../../../application/update-contact/update-contact.service';
 import {
   Body,
   Headers,
@@ -8,10 +10,9 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CreateContactResponseDTO } from 'src/modules/contact/src/application/create-contact/create-contact.response.dto';
-import { SUCCESSFUL_RESPONSE } from 'src/modules/shared/infrastructure/constants/constants';
-import { ApiController } from 'src/modules/shared/infrastructure/decorators/api-controller.decorator';
-import { routesV1 } from 'src/routes';
+import { SUCCESSFUL_RESPONSE } from '../../../../../../shared/infrastructure/constants/constants';
+import { ApiController } from '../../../../../../shared/infrastructure/decorators/api-controller.decorator';
+import { routesV1 } from '../../../../../../..//routes';
 import {
   UpdateContactBodyInputDTO,
   UpdateContactParamsInputDTO,
@@ -20,17 +21,19 @@ import {
 @ApiController(routesV1.version)
 @ApiTags('Contacts')
 export class UpdateContactController {
+  constructor(private readonly service: UpdateContactService) {}
+
   @Put(routesV1.users.updateContact)
   @ApiOperation({ summary: 'Update a contact of an user.' })
   @ApiOkResponse({
     description: SUCCESSFUL_RESPONSE,
     status: HttpStatus.OK,
-    type: String,
+    type: UpdateContactResponseDTO,
   })
   async updateContact(
     @Param() params: UpdateContactParamsInputDTO,
     @Body() body: UpdateContactBodyInputDTO,
-  ): Promise<string> {
-    return '';
+  ): Promise<UpdateContactResponseDTO> {
+    return this.service.execute(params, body);
   }
 }
