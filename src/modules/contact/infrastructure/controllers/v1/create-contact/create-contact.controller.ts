@@ -1,27 +1,31 @@
 import { Body, HttpStatus, Param, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { SUCCESSFUL_RESPONSE } from 'src/modules/shared/infrastructure/constants/constants';
-import { ApiController } from 'src/modules/shared/infrastructure/decorators/api-controller.decorator';
-import { routesV1 } from 'src/routes';
+import { CreateContactService } from '../../../../../contact/application/create-contact/create-contact.service';
+import { SUCCESSFUL_RESPONSE } from '../../../../../shared/infrastructure/constants/constants';
+import { ApiController } from '../../../../../shared/infrastructure/decorators/api-controller.decorator';
+import { routesV1 } from '../../../../../..//routes';
 import {
   CreateContactBodyInputDto,
   CreateContactParamsImputDto,
 } from './create-contact.input.dto';
+import { CreateContactResponseDTO } from '../../../../../contact/application/create-contact/create-contact.response.dto';
 
 @ApiController(routesV1.version)
 @ApiTags('Contacts')
 export class CreateContactController {
+  constructor(private readonly service: CreateContactService) {}
+
   @Post(routesV1.users.createContact)
   @ApiOperation({ summary: 'Create a new contact for current user.' })
   @ApiOkResponse({
     description: SUCCESSFUL_RESPONSE,
     status: HttpStatus.OK,
-    type: Boolean,
+    type: CreateContactResponseDTO,
   })
   async createContact(
     @Param() params: CreateContactParamsImputDto,
     @Body() body: CreateContactBodyInputDto,
-  ): Promise<any> {
-    return true;
+  ): Promise<CreateContactResponseDTO> {
+    return this.service.execute(params, body);
   }
 }
